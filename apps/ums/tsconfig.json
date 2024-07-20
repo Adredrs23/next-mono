@@ -1,0 +1,31 @@
+{
+	"extends": "@repo/typescript-config/nextjs.json",
+	"compilerOptions": {
+		"plugins": [{ "name": "next" }],
+		"paths": {
+			"@/*": ["./src/*"]
+		}
+	},
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		".next/types/**/*.ts",
+		"../../packages/ui/src/components/avatar.tsx",
+		"../../packages/ui/src/components/badge.tsx",
+		"../../packages/ui/src/components/button.tsx",
+		"../../packages/ui/src/components/card.tsx",
+		"../../packages/ui/src/components/dialog.tsx",
+		"../../packages/ui/src/components/dropdown-menu.tsx",
+		"../../packages/ui/src/components/index.ts",
+		"../../packages/ui/src/components/input.tsx",
+		"../../packages/ui/src/components/label.tsx",
+		"../../packages/ui/src/components/progress.tsx",
+		"../../packages/ui/src/components/select.tsx",
+		"../../packages/ui/src/components/sheet.tsx",
+		"../../packages/ui/src/components/tabs.tsx",
+		"../../packages/ui/src/components/textarea.tsx",
+		"../../packages/ui/src/components/tooltip.tsx"
+	],
+	"exclude": ["node_modules"]
+}

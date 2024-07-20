@@ -1,0 +1,94 @@
+{
+	"users": [
+		{
+			"id": "1",
+			"name": "John Doe",
+			"avatarUrl": "https://picsum.photos/id/1/200/300",
+			"jobTitle": "CEO"
+		},
+		{
+			"id": "2",
+			"name": "Jane Doe",
+			"avatarUrl": "https://picsum.photos/id/2/200/300",
+			"jobTitle": "Marketing Manager"
+		},
+		{
+			"id": "3",
+			"name": "Johny Doe",
+			"avatarUrl": "https://picsum.photos/id/3/200/300",
+			"jobTitle": "Sales Representative"
+		},
+		{
+			"id": "4",
+			"name": "Janey Doe",
+			"avatarUrl": "https://picsum.photos/id/4/200/300",
+			"jobTitle": "Customer Success Manager"
+		}
+	],
+	"userDetails": [
+		{
+			"id": "1",
+			"name": "John Doe",
+			"activeStatus": true,
+			"avatarUrl": "https://picsum.photos/id/1/200/300",
+			"email": "john.doe@example.com",
+			"role": "admin",
+			"dateOfBirth": "1992-01-21T00:00:00.000Z",
+			"dateOfJoining": "2023-05-01T00:00:00.000Z",
+			"address": "123 Main St, Anytown, USA 12345",
+			"phoneNumber": "115-123-4567",
+			"website": "https://example.com",
+			"company": "Enix",
+			"jobTitle": "CEO",
+			"skypeId": "john.doe@skyepipi"
+		},
+		{
+			"id": "2",
+			"name": "Jane Doe",
+			"activeStatus": true,
+			"avatarUrl": "https://picsum.photos/id/2/200/300",
+			"email": "jane.doe@example.com",
+			"role": "user",
+			"dateOfBirth": "2010-01-01T00:00:00.000Z",
+			"dateOfJoining": "2023-07-10T00:00:00.000Z",
+			"address": "123 Main St, Anytown, Uttar Pradesh",
+			"phoneNumber": "555-123-4567",
+			"website": "https://example.com",
+			"company": "Enix",
+			"jobTitle": "Marketing Manager",
+			"skypeId": "jane.doe@skyepipi"
+		},
+		{
+			"id": "3",
+			"name": "Johny Doe",
+			"activeStatus": false,
+			"avatarUrl": "https://picsum.photos/id/3/200/300",
+			"email": "johny.doe@example.com",
+			"role": "admin",
+			"dateOfBirth": "1990-01-01T00:00:00.000Z",
+			"dateOfJoining": "2023-05-01T00:00:00.000Z",
+			"address": "123 Main St, Anytown, Uttarakhand",
+			"phoneNumber": "666-123-4567",
+			"website": "https://example.com",
+			"company": "Enix",
+			"jobTitle": "Sales Representative",
+			"skypeId": "johny.doe@skyepipi"
+		},
+		{
+			"id": "4",
+			"name": "Janey Doe",
+			"activeStatus": false,
+			"avatarUrl": "https://picsum.photos/id/4/200/300",
+			"email": "janey.doe@example.com",
+			"role": "user",
+			"dateOfBirth": "1997-11-16T00:00:00.000Z",
+			"dateOfJoining": "2023-07-01T00:00:00.000Z",
+			"address": "123 Main St, Anytown, Your State",
+			"phoneNumber": "911-123-4567",
+			"website": "https://example.com",
+			"company": "Enix",
+			"jobTitle": "Customer Success Manager",
+			"skypeId": "janey.doe@skyepipi"
+		}
+	]
+}
