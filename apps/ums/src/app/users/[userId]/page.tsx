@@ -2,7 +2,7 @@ import { UserContentPanel } from '@/components';
 
 // Fetching data from the server in the layoutd
 async function getUserDetail(userId: string) {
-	const res = await fetch('http://localhost:3000/api/users/' + userId, {
+	const res = await fetch(`http://localhost:3000/api/users/${  userId}`, {
 		cache: 'no-store',
 	});
 

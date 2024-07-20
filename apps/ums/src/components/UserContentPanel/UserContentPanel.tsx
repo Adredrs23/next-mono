@@ -9,15 +9,15 @@ import {
 	TabsList,
 	TabsTrigger,
 	Badge,
-} from '@/components/Atoms';
+} from '@repo/ui/components';
+import type { UserType } from '@/components/UsersNavigationPanel';
+import { getInitials } from '@/utlls';
 
-import { UserType } from '@/components/UsersNavigationPanel';
-
-export const UserContentPanel = ({
+export function UserContentPanel({
 	userDetails,
 }: {
 	userDetails: UserType;
-}) => {
+}): JSX.Element {
 	const {
 		activeStatus,
 		avatarUrl,
@@ -31,78 +31,102 @@ export const UserContentPanel = ({
 		skypeId,
 	} = userDetails;
 
-	const getInitials = (name: string) => {
-		const names = name.split(' ');
-		return names.map((n) => n.charAt(0)).join('');
-	};
-
 	const initials = getInitials(name);
 
 	return (
 		<>
-			<div className="flex items-center">
-				<Avatar className="mr-4">
+			<div className='flex items-center'>
+				<Avatar className='mr-4'>
 					<AvatarImage src={avatarUrl} />
 					<AvatarFallback>{initials}</AvatarFallback>
 				</Avatar>
 				<div>
-					<h3 className="text-lg font-medium">{name}</h3>
-					<div className="text-muted-foreground">
-						<span className="font-medium">Designation:</span> {jobTitle}
+					<h3 className='text-lg font-medium'>{name}</h3>
+					<div className='text-muted-foreground'>
+						<span className='font-medium'>Designation:</span> {jobTitle}
 					</div>
-					<div className="text-muted-foreground">
-						<span className="font-medium">Status:</span>{' '}
+					<div className='text-muted-foreground'>
+						<span className='font-medium'>Status:</span>{' '}
 						<Badge variant={activeStatus ? 'outline' : 'destructive'}>
 							{activeStatus ? 'Active' : 'Inactive'}
 						</Badge>
 					</div>
 				</div>
 			</div>
-			<Tabs defaultValue="profile">
+			<Tabs defaultValue='profile'>
 				<TabsList>
-					<TabsTrigger value="profile">Profile</TabsTrigger>
-					<TabsTrigger value="contact">Contact</TabsTrigger>
+					<TabsTrigger value='profile'>Profile</TabsTrigger>
+					<TabsTrigger value='contact'>Contact</TabsTrigger>
 				</TabsList>
-				<TabsContent value="profile">
-					<div className="w-full pl-6">
-						<div className="space-y-4">
-							<div className="flex items-center">
-								<label className="w-24 font-medium">Date of Birth:</label>
+				<TabsContent value='profile'>
+					<div className='w-full pl-6'>
+						<div className='space-y-4'>
+							<div className='flex items-center'>
+								<label className='w-24 font-medium' htmlFor='dateOfBirth'>
+									Date of Birth:
+								</label>
 								<Input
+									className='w-full'
+									id='dateOfBirth'
 									readOnly
 									value={new Date(dateOfBirth).toLocaleDateString()}
-									className="w-full"
 								/>
 							</div>
-							<div className="flex items-center">
-								<label className="w-24 font-medium">Joined:</label>
+							<div className='flex items-center'>
+								<label className='w-24 font-medium' htmlFor='dateOfJoining'>
+									Joined:
+								</label>
 								<Input
+									className='w-full'
+									id='dateOfJoining'
 									readOnly
 									value={new Date(dateOfJoining).toLocaleDateString()}
-									className="w-full"
 								/>
 							</div>
-							<div className="flex items-start">
-								<label className="w-24 font-medium">Address:</label>
-								<Textarea readOnly value={address} className="w-full" />
+							<div className='flex items-start'>
+								<label className='w-24 font-medium' htmlFor='address'>
+									Address:
+								</label>
+								<Textarea
+									className='w-full'
+									id='address'
+									readOnly
+									value={address}
+								/>
 							</div>
 						</div>
 					</div>
 				</TabsContent>
-				<TabsContent value="contact">
-					<div className="w-full pl-6">
-						<div className="space-y-4">
-							<div className="flex items-center">
-								<label className="w-24 font-medium">Mobile:</label>
-								<Input readOnly value={phoneNumber} className="w-full" />
+				<TabsContent value='contact'>
+					<div className='w-full pl-6'>
+						<div className='space-y-4'>
+							<div className='flex items-center'>
+								<label className='w-24 font-medium' htmlFor='phoneNumber'>
+									Mobile:
+								</label>
+								<Input
+									className='w-full'
+									id='phoneNumber'
+									readOnly
+									value={phoneNumber}
+								/>
 							</div>
-							<div className="flex items-center">
-								<label className="w-24 font-medium">Skype ID:</label>
-								<Input readOnly value={skypeId} className="w-full" />
+							<div className='flex items-center'>
+								<label className='w-24 font-medium' htmlFor='skypeId'>
+									Skype ID:
+								</label>
+								<Input
+									className='w-full'
+									id='skypeId'
+									readOnly
+									value={skypeId}
+								/>
 							</div>
-							<div className="flex items-center">
-								<label className="w-24 font-medium">Email:</label>
-								<Input readOnly value={email} className="w-full" />
+							<div className='flex items-center'>
+								<label className='w-24 font-medium' htmlFor='email'>
+									Email:
+								</label>
+								<Input className='w-full' id='email' readOnly value={email} />
 							</div>
 						</div>
 					</div>
@@ -110,4 +134,4 @@ export const UserContentPanel = ({
 			</Tabs>
 		</>
 	);
-};
+}

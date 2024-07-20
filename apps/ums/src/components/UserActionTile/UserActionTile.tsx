@@ -1,7 +1,7 @@
-import { Button } from '@/components/Atoms';
-import React from 'react';
+import React, { forwardRef } from 'react';
+import { Button } from '@repo/ui/components';
 
-const UserActionTile = (
+function UserActionTile(
 	{
 		children,
 		actionLabel = 'Action',
@@ -11,19 +11,20 @@ const UserActionTile = (
 		actionLabel?: string;
 	},
 	ref: React.ForwardedRef<HTMLButtonElement>
-) => {
+): JSX.Element {
 	return (
 		<Button
-			variant="secondary"
-			className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted-foreground hover:text-white "
+			className='flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted-foreground hover:text-white '
 			ref={ref}
+			variant='secondary'
 			{...restProps}
 		>
 			{children}
 			<span>{actionLabel}</span>
 		</Button>
 	);
-};
+}
 
-const UserActionTileWithForwardRef = React.forwardRef(UserActionTile);
+const UserActionTileWithForwardRef = forwardRef(UserActionTile);
+
 export { UserActionTileWithForwardRef as UserActionTile };

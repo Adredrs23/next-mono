@@ -1,8 +1,7 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { UserPlusIcon } from 'lucide-react';
-
 import {
 	Dialog,
 	DialogTrigger,
@@ -20,17 +19,13 @@ import {
 	SelectContent,
 	SelectItem,
 	Progress,
-} from '@repo/ui';
-import { UserPartialType, UserType } from '@/types/interfaces';
+} from '@repo/ui/components';
+import type { ZodFormattedError } from 'zod';
+import type { UserPartialType, UserType } from '@/types/interfaces';
+import { AddUserStep1Schema, AddUserStep2Schema } from '@/types/zodSchemas';
 import { UserActionTile } from '../UserActionTile';
-import {
-	AddUserStep1Schema,
-	AddUserStep2Schema,
-	userSchema,
-} from '@/types/zodSchemas';
-import { set, ZodError, ZodFormattedError } from 'zod';
 
-export function AddUserModal() {
+export function AddUserModal(): JSX.Element {
 	const [currentStep, setCurrentStep] = useState(1);
 	const [errors, setErrors] =
 		useState<ZodFormattedError<UserPartialType> | null>(null);
@@ -69,12 +64,12 @@ export function AddUserModal() {
 		setErrors(null);
 	};
 
-	const handlePrevStep = () => {
+	const handlePrevStep = (): void => {
 		// We will simply allow the user to go back to step 1 if they are on step 2, no need to validate
 		setCurrentStep(currentStep - 1);
 	};
 
-	const handleSubmit = (e: any) => {
+	const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>): void => {
 		e.preventDefault();
 		// validate the form data for step 2 by calling the validate function
 		if (!validate()) return;
@@ -94,17 +89,17 @@ export function AddUserModal() {
 			});
 
 			if (!result.success) {
-				const errors = result.error.format();
-				console.log(errors);
-				setErrors(errors);
+				const userStep1ZodErrors = result.error.format();
+				console.log(userStep1ZodErrors);
+				setErrors(userStep1ZodErrors);
 				return false;
 			}
 		} else {
 			const result = AddUserStep2Schema.safeParse(formData);
 			if (!result.success) {
-				const errors = result.error.format();
-				console.log(errors);
-				setErrors(errors);
+				const userStep2ZodErrors = result.error.format();
+				console.log(userStep2ZodErrors);
+				setErrors(userStep2ZodErrors);
 				return false;
 			}
 		}
@@ -157,50 +152,56 @@ export function AddUserModal() {
 								<div className='grid grid-cols-1 gap-2'>
 									<Label htmlFor='name'>Name</Label>
 									<Input
+										className={errors?.name ? 'border-red-500' : ''}
 										id='name'
+										onChange={handleInputChange}
 										placeholder='Enter name'
 										value={formData.name}
-										onChange={handleInputChange}
-										className={errors?.name ? 'border-red-500' : ''}
 									/>
-									{errors?.name && <Errors errors={errors.name._errors} />}
+									{errors?.name ? (
+										<Errors errors={errors.name._errors} />
+									) : null}
 								</div>
 								<div className='grid grid-cols-1 gap-2'>
 									<Label htmlFor='email'>Email</Label>
 									<Input
-										id='email'
-										type='email'
-										placeholder='Enter email'
-										value={formData.email}
-										onChange={handleInputChange}
 										className={errors?.email ? 'border-red-500' : ''}
+										id='email'
+										onChange={handleInputChange}
+										placeholder='Enter email'
+										type='email'
+										value={formData.email}
 									/>
-									{errors?.email && <Errors errors={errors.email._errors} />}
+									{errors?.email ? (
+										<Errors errors={errors.email._errors} />
+									) : null}
 								</div>
 								<div className='grid grid-cols-1 gap-2'>
 									<Label htmlFor='phone'>Phone</Label>
 									<Input
-										id='phone'
-										type='tel'
-										placeholder='Enter phone number'
-										value={formData.phone}
-										onChange={handleInputChange}
 										className={errors?.phone ? 'border-red-500' : ''}
+										id='phone'
+										onChange={handleInputChange}
+										placeholder='Enter phone number'
+										type='tel'
+										value={formData.phone}
 									/>
-									{errors?.phone && <Errors errors={errors.phone._errors} />}
+									{errors?.phone ? (
+										<Errors errors={errors.phone._errors} />
+									) : null}
 								</div>
 								<div className='grid grid-cols-1 gap-2'>
 									<Label htmlFor='address'>Address</Label>
 									<Input
+										className={errors?.address ? 'border-red-500' : ''}
 										id='address'
+										onChange={handleInputChange}
 										placeholder='Enter address'
 										value={formData.address}
-										onChange={handleInputChange}
-										className={errors?.address ? 'border-red-500' : ''}
 									/>
-									{errors?.address && (
+									{errors?.address ? (
 										<Errors errors={errors.address._errors} />
-									)}
+									) : null}
 								</div>
 							</div>
 						)}
@@ -210,11 +211,11 @@ export function AddUserModal() {
 									<Label htmlFor='role'>Role</Label>
 									<Select
 										// id="role"
-										value={formData.role}
 										// className={errors?.role ? 'border-red-500' : ''}
-										onValueChange={(role) =>
-											setFormData({ ...formData, role: role })
-										}
+										onValueChange={(role) => {
+											setFormData({ ...formData, role });
+										}}
+										value={formData.role}
 									>
 										<SelectTrigger className='w-full'>
 											<SelectValue placeholder='Select role' />
@@ -225,68 +226,72 @@ export function AddUserModal() {
 											<SelectItem value='user'>User</SelectItem>
 										</SelectContent>
 									</Select>
-									{errors?.role && <Errors errors={errors.role._errors} />}
+									{errors?.role ? (
+										<Errors errors={errors.role._errors} />
+									) : null}
 								</div>
 								<div className='grid grid-cols-1 gap-2'>
 									<Label htmlFor='github'>Github</Label>
 									<Input
+										className={errors?.github ? 'border-red-500' : ''}
 										id='github'
+										onChange={handleInputChange}
 										placeholder='Enter Github username'
 										value={formData.github}
-										onChange={handleInputChange}
-										className={errors?.github ? 'border-red-500' : ''}
 									/>
-									{errors?.github && <Errors errors={errors.github._errors} />}
+									{errors?.github ? (
+										<Errors errors={errors.github._errors} />
+									) : null}
 								</div>
 								<div className='grid grid-cols-1 gap-2'>
 									<Label htmlFor='linkedin'>LinkedIn</Label>
 									<Input
+										className={errors?.linkedin ? 'border-red-500' : ''}
 										id='linkedin'
+										onChange={handleInputChange}
 										placeholder='Enter LinkedIn profile URL'
 										value={formData.linkedin}
-										onChange={handleInputChange}
-										className={errors?.linkedin ? 'border-red-500' : ''}
 									/>
-									{errors?.linkedin && (
+									{errors?.linkedin ? (
 										<Errors errors={errors.linkedin._errors} />
-									)}
+									) : null}
 								</div>
 								<div className='grid grid-cols-1 gap-2'>
 									<Label htmlFor='skypeid'>Skype ID</Label>
 									<Input
+										className={errors?.skypeid ? 'border-red-500' : ''}
 										id='skypeid'
+										onChange={handleInputChange}
 										placeholder='Enter Skype ID'
 										value={formData.skypeid}
-										onChange={handleInputChange}
-										className={errors?.skypeid ? 'border-red-500' : ''}
 									/>
-									{errors?.skypeid && (
+									{errors?.skypeid ? (
 										<Errors errors={errors.skypeid._errors} />
-									)}
+									) : null}
 								</div>
 								<div className='grid grid-cols-1 gap-2'>
 									<Label htmlFor='dob'>Date of Birth</Label>
 									<Input
-										id='dob'
-										type='date'
-										placeholder='Enter date of birth'
-										value={formData.dob}
-										onChange={handleInputChange}
 										className={errors?.dob ? 'border-red-500' : ''}
+										id='dob'
+										onChange={handleInputChange}
+										placeholder='Enter date of birth'
+										type='date'
+										value={formData.dob}
 									/>
-									{errors?.dob && <Errors errors={errors.dob._errors} />}
+									{errors?.dob ? <Errors errors={errors.dob._errors} /> : null}
 								</div>
 								<div className='grid grid-cols-1 gap-2'>
 									<Label htmlFor='doj'>Date of Joining</Label>
 									<Input
-										id='doj'
-										type='date'
-										placeholder='Enter date of joining'
-										value={formData.doj}
-										onChange={handleInputChange}
 										className={errors?.doj ? 'border-red-500' : ''}
+										id='doj'
+										onChange={handleInputChange}
+										placeholder='Enter date of joining'
+										type='date'
+										value={formData.doj}
 									/>
-									{errors?.doj && <Errors errors={errors.doj._errors} />}
+									{errors?.doj ? <Errors errors={errors.doj._errors} /> : null}
 								</div>
 							</div>
 						)}
@@ -294,40 +299,37 @@ export function AddUserModal() {
 				</form>
 				<DialogFooter className='flex justify-between border-t pt-4'>
 					{currentStep > 1 && (
-						<Button variant='outline' onClick={handlePrevStep}>
+						<Button onClick={handlePrevStep} variant='outline'>
 							Previous
 						</Button>
 					)}
 					{currentStep < 2 && <Button onClick={handleNextStep}>Next</Button>}
-					{currentStep === 2 && (
-						<Button type='submit' onClick={handleSubmit}>
-							Save User
-						</Button>
-					)}
+					{currentStep === 2 && <Button type='submit'>Save User</Button>}
 				</DialogFooter>
 				<div className='mt-4'>
-					<Progress value={(currentStep / 2) * 100} className='w-full' />
+					<Progress className='w-full' value={(currentStep / 2) * 100} />
 				</div>
 			</DialogContent>
 		</Dialog>
 	);
 }
 
-type ErrorsType = {
-	errors: Array<string>;
-};
+interface ErrorsType {
+	errors: string[];
+}
 
-const Errors: FC<ErrorsType> = ({ errors }) => {
-	if (!errors?.length) return null;
+function Errors({ errors }: ErrorsType): JSX.Element | null {
+	if (!errors.length) return null;
 
 	return (
 		<div className='flex  gap-2'>
 			{errors.map((errorMessage, index) => (
-				<span key={errorMessage + index} className='text-red-500 text-sm'>
-					<span className={index == 0 ? 'hidden' : 'inline-block'}>|</span>{' '}
+				// eslint-disable-next-line react/no-array-index-key -- just using the index as the key
+				<span className='text-red-500 text-sm' key={errorMessage + index}>
+					<span className={index === 0 ? 'hidden' : 'inline-block'}>|</span>{' '}
 					{errorMessage}
 				</span>
 			))}
 		</div>
 	);
-};
+}

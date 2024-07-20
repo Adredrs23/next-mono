@@ -1,3 +1,3 @@
-export type WelcomeEmailProps = { 
+export interface WelcomeEmailProps { 
 	userFirstname: string;
 }

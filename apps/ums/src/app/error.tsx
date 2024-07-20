@@ -20,7 +20,7 @@ export default function Error({
 			<button
 				onClick={
 					// Attempt to recover by trying to re-render the segment
-					() => reset()
+					() => { reset(); }
 				}
 			>
 				Try again

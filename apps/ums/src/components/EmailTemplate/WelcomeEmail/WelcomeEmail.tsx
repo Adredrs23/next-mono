@@ -10,15 +10,14 @@ import {
 	Section,
 	Text,
 } from '@react-email/components';
-
-import { WelcomeEmailProps } from './interfaces';
+import type { WelcomeEmailProps } from './interfaces';
 
 const baseUrl = process.env.VERCEL_URL
 	? `https://${process.env.VERCEL_URL}`
 	: '';
 
-export const WelcomeEmail = ({ userFirstname }: WelcomeEmailProps) => (
-	<Html>
+export function WelcomeEmail({ userFirstname }: WelcomeEmailProps) {
+  return <Html>
 		<Head />
 		<Preview>
 			The sales intelligence platform that helps you uncover qualified leads.
@@ -26,11 +25,11 @@ export const WelcomeEmail = ({ userFirstname }: WelcomeEmailProps) => (
 		<Body style={main}>
 			<Container style={container}>
 				<Img
-					src={`${baseUrl}/static/koala-logo.png`}
-					width="170"
-					height="50"
 					alt="Koala"
+					height="50"
+					src={`${baseUrl}/static/koala-logo.png`}
 					style={logo}
+					width="170"
 				/>
 				<Text style={paragraph}>Hi {userFirstname},</Text>
 				<Text style={paragraph}>
@@ -38,7 +37,7 @@ export const WelcomeEmail = ({ userFirstname }: WelcomeEmailProps) => (
 					uncover qualified leads and close deals faster.
 				</Text>
 				<Section style={btnContainer}>
-					<Button style={button} href="https://getkoala.com">
+					<Button href="https://getkoala.com" style={button}>
 						Get started
 					</Button>
 				</Section>
@@ -54,7 +53,7 @@ export const WelcomeEmail = ({ userFirstname }: WelcomeEmailProps) => (
 			</Container>
 		</Body>
 	</Html>
-);
+}
 
 const main = {
 	backgroundColor: '#ffffff',

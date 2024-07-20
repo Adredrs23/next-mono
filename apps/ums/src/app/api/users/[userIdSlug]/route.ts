@@ -7,7 +7,7 @@ export async function GET(
 	const userIdSlug = params.userIdSlug;
 
 	try {
-		const res = await fetch('http://localhost:3001/userDetails/' + userIdSlug, {
+		const res = await fetch(`http://localhost:3001/userDetails/${  userIdSlug}`, {
 			headers: {
 				'Content-Type': 'application/json',
 			},
