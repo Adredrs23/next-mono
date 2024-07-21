@@ -12,3 +12,4 @@ export * from './components/dialog';
 export * from './components/label';
 export * from './components/select';
 export * from './components/progress';
+export * from './components/emails/welcome-email';

@@ -5,9 +5,9 @@ import {
 	CardContent,
 	CardDescription,
 } from '@repo/ui/components';
-import { type UserDetailsProps } from './types';
+import { type UserMainPanelProps } from './types';
 
-export function UserDetails({ children }: UserDetailsProps): JSX.Element {
+export function UsersMainPanel({ children }: UserMainPanelProps): JSX.Element {
 	return (
 		<div className='grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2'>
 			<Card x-chunk='dashboard-05-chunk-3'>

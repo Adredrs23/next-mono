@@ -17,6 +17,7 @@
 		"@repo/ui": "workspace:*",
 		"@types/validator": "^13.12.0",
 		"concurrently": "^8.2.2",
+		"dotenv": "^16.4.5",
 		"json-server": "1.0.0-beta.1",
 		"lucide-react": "^0.400.0",
 		"next": "14.2.4",

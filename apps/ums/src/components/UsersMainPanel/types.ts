@@ -1,3 +1,3 @@
-export type UserDetailsProps = {
+export type UserMainPanelProps = {
 	children?: React.ReactNode;
 };
