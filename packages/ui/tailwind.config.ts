@@ -5,7 +5,7 @@ import { fontFamily } from 'tailwindcss/defaultTheme';
 
 const config: Config = {
 	content: ['./src/**/*.{ts,tsx}'],
-	prefix: 'ui-',
+	prefix: 'ui-', // TODO: remove this as this might be breaking patch in globalcss the styles are produced as ui-twclassname
 	darkMode: ['class'],
 	presets: [sharedConfig],
 	theme: {
