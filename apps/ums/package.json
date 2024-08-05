@@ -13,6 +13,7 @@
 		"type-check": "tsc --noEmit"
 	},
 	"dependencies": {
+		"@clerk/nextjs": "^5.2.12",
 		"@react-email/components": "^0.0.21",
 		"@repo/ui": "workspace:*",
 		"@types/validator": "^13.12.0",

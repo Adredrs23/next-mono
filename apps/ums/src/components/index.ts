@@ -8,3 +8,5 @@ export * from './UsersActionPanel';
 export * from './UsersMainPanel';
 export * from './UsersNavigationPanel';
 export * from './UserTile';
+export * from './SyncActiveOrganization';
+export * from './CustomOrgSwitcher';
