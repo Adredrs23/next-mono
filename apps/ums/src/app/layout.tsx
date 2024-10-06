@@ -20,9 +20,9 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>): JSX.Element {
-	const { orgId } = auth();
+	// const { orgId } = auth();
 
-	const hasActiveOrg = orgId !== null;
+	// const hasActiveOrg = orgId !== null;
 
 	return (
 		<ClerkProvider>
@@ -35,7 +35,7 @@ export default function RootLayout({
 							<MobileHeader />
 
 							<main className='grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-4'>
-								{hasActiveOrg ? 'isActive' + orgId : 'isntActive'}
+								{/* {hasActiveOrg ? 'isActive' + orgId : 'isntActive'} */}
 								{children}
 							</main>
 						</div>
