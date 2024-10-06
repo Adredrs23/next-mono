@@ -4,33 +4,37 @@ import {
 	UsersActionPanel,
 	UsersNavigationPanel,
 } from '@/components';
+import { trpc } from '../_trpc/client';
 
 export const metadata: Metadata = {
-	title: 'Enix Demo | Users',
-	description: 'Demo for Enix',
+	title: 'The DayOwls | Users',
+	description: 'A social media flatform for writers.',
 };
 
 // Fetching data from the server in the layoutd
-async function getData() {
-	const res = await fetch('http://localhost:3000/api/users', {
-		cache: 'no-store',
-	});
+function getData(): number[] {
+	const { data, error } = trpc.getTodos.useQuery();
+	// const res = await fetch('http://localhost:3000/api/users', {
+	// 	cache: 'no-store',
+	// });
 
-	if (!res.ok) {
+	if (error) {
 		// This will activate the closest `error.js` Error Boundary
 		throw new Error('Failed to fetch data');
 	}
-	const getUsersResponse = await res.json();
+	if (!data) {
+		throw new Error('Failed to fetch data');
+	}
 
-	return getUsersResponse.data;
+	return data;
 }
 
-export default async function Users({
+export default function Users({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
-}>) {
-	const data = await getData();
+}>): JSX.Element {
+	const data = getData();
 
 	return (
 		<>
