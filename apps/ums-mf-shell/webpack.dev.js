@@ -10,6 +10,7 @@ module.exports = merge(commonConfig, {
 		},
 		port: 3005,
 		hot: true,
+		historyApiFallback: true,
 	},
 	devtool: 'inline-source-map',
 });

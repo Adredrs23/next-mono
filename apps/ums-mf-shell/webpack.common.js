@@ -25,6 +25,10 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './public/index.html',
 		}),
+		new HtmlWebpackPlugin({
+			template: './public/silent-check-sso.html',
+			filename: 'silent-check-sso.html', // Output filename
+		}),
 		new ModuleFederationPlugin({
 			name: 'mfShell',
 			filename: 'remoteEntry.js',

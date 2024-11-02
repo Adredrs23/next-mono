@@ -1,45 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+// import { ErrorBoundary } from './ErrorBoundary';
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	createBrowserRouter,
+	Navigate,
+	RouterProvider,
+} from 'react-router-dom';
+import Login from './Login';
+import { ProtectedRoute } from './ProtectedRoute';
 import { ErrorBoundary } from './ErrorBoundary';
-const Button = React.lazy(() =>
-	import('mfApp/Button').then((mod) => ({ default: mod.Button }))
-);
+import { Button } from 'mfApp/Button';
+import { Root } from './Root';
+import { KeycloakProvider } from './providers/KeyCloakProvider';
 
-export const App: React.ComponentType = () => (
-	<div>
-		<h1>Hello from Module Federation App!!!</h1>
-		{/* <ErrorBoundary>
-			<Button label='Hello' />
-		</ErrorBoundary> */}
-		<Posts />
-	</div>
-);
-
-type Post = {
-	id: number;
-	title: string;
-	body: string;
-};
-type Posts = Post[];
-
-const fetchPosts = async (
-	page: number,
-	limit: number,
-	signal?: AbortSignal
-) => {
-	const response = await axios.get(
-		'https://jsonplaceholder.typicode.com/posts',
-		{
-			params: {
-				_page: page,
-				_limit: limit,
-			},
-			signal,
-		}
-	);
-	return response.data;
-};
-
+// const Button = React.lazy(() =>
+// 	import('mfApp/Button').then((mod) => ({ default: mod.Button }))
+// );
 const Posts: React.ComponentType = () => {
 	const [posts, setPosts] = useState<Posts>([]);
 	const [page, setPage] = useState(1);
@@ -100,3 +79,59 @@ const Posts: React.ComponentType = () => {
 		</div>
 	);
 };
+
+type Post = {
+	id: number;
+	title: string;
+	body: string;
+};
+type Posts = Post[];
+
+const fetchPosts = async (
+	page: number,
+	limit: number,
+	signal?: AbortSignal
+) => {
+	const response = await axios.get(
+		'https://jsonplaceholder.typicode.com/posts',
+		{
+			params: {
+				_page: page,
+				_limit: limit,
+			},
+			signal,
+		}
+	);
+	return response.data;
+};
+
+const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <Root />,
+	},
+	{
+		path: '/login',
+		element: <Login />,
+	},
+	{
+		path: '/posts',
+		element: (
+			// <ProtectedRoute>
+			<div>
+				<h1>Hello from Module Federation App!!!</h1>
+				{/* <ErrorBoundary>
+					<Button label='Hello' />
+				</ErrorBoundary> */}
+				<Posts />
+			</div>
+			// </ProtectedRoute>
+		),
+	},
+]);
+
+export const App: React.ComponentType = () => (
+	// <KeycloakProvider>
+	<RouterProvider router={router} />
+	// </KeycloakProvider>
+);
