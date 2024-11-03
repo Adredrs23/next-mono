@@ -117,15 +117,15 @@ const router = createBrowserRouter([
 	{
 		path: '/posts',
 		element: (
-			// <ProtectedRoute>
-			<div>
-				<h1>Hello from Module Federation App!!!</h1>
-				{/* <ErrorBoundary>
+			<ProtectedRoute>
+				<div>
+					<h1>Hello from Module Federation App!!!</h1>
+					{/* <ErrorBoundary>
 					<Button label='Hello' />
 				</ErrorBoundary> */}
-				<Posts />
-			</div>
-			// </ProtectedRoute>
+					<Posts />
+				</div>
+			</ProtectedRoute>
 		),
 	},
 ]);
