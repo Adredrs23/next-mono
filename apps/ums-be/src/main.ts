@@ -7,7 +7,7 @@ async function bootstrap() {
 
   app.use(cookieParser());
   app.enableCors({
-    origin: 'http://localhost:3005', // Replace with your React app URL or use '*' for any origin
+    origin: ['http://localhost:3005', 'http://localhost:3006'], // Replace with your React app URL or use '*' for any origin
     credentials: true, // Allows sending cookies with CORS requests
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Specify allowed methods
   });

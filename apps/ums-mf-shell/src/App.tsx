@@ -1,25 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-// import { ErrorBoundary } from './ErrorBoundary';
-import {
-	BrowserRouter as Router,
-	Routes,
-	Route,
-	createBrowserRouter,
-	Navigate,
-	RouterProvider,
-	Link,
-} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Link } from 'react-router-dom';
 import Login from './Login';
 import { ProtectedRoute } from './ProtectedRoute';
 import { ErrorBoundary } from './ErrorBoundary';
-import { Button } from 'mfApp/Button';
-import { Root } from './Root';
-import { KeycloakProvider } from './providers/KeyCloakProvider';
 
-// const Button = React.lazy(() =>
-// 	import('mfApp/Button').then((mod) => ({ default: mod.Button }))
-// );
+const Button = React.lazy(() =>
+	import('mfApp/Button').then((mod) => ({ default: mod.Button }))
+);
+const Images = React.lazy(() =>
+	import('mfApp/Images').then((mod) => ({ default: mod.Images }))
+);
+
 const Posts: React.ComponentType = () => {
 	const [posts, setPosts] = useState<Posts>([]);
 	const [page, setPage] = useState(1);
@@ -117,9 +109,16 @@ const router = createBrowserRouter([
 			<ProtectedRoute>
 				<div>
 					<h1>Hello from Module Federation App!!!</h1>
-					{/* <ErrorBoundary>
-					<Button label='Hello' />
-				</ErrorBoundary> */}
+					<Suspense fallback={<div>Loading...</div>}>
+						<ErrorBoundary>
+							<Button label='Hello' />
+						</ErrorBoundary>
+					</Suspense>
+					<Suspense fallback={<div>Loading...</div>}>
+						<ErrorBoundary>
+							<Images />
+						</ErrorBoundary>
+					</Suspense>
 					<Posts />
 				</div>
 				<Link to='/'>Home</Link>

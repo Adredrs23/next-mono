@@ -30,6 +30,7 @@ module.exports = {
 			filename: 'remoteEntry.js',
 			exposes: {
 				'./Button': './src/Button',
+				'./Images': './src/Images',
 			},
 			remotes: {
 				mfShell: 'mfShell@http://localhost:3005/remoteEntry.js',

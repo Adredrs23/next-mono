@@ -10,7 +10,7 @@ interface ProtectedRouteProps {
 
 export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
 	const { isAuthenticated, isLoading } = useAuth();
-	const location = useLocation();
+	// const location = useLocation();
 	const dispatch = useAppDispatch();
 
 	// const checkUserSession = () => async () => {
@@ -77,7 +77,7 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
 					)
 					.then((response) => {
 						dispatch(logout());
-						return <Navigate to='/' state={{ from: location }} replace />;
+						// return <Navigate to='/' state={{ from: location }} replace />;
 					});
 			}
 		}

@@ -37,6 +37,7 @@ module.exports = {
 			},
 			exposes: {
 				'./ErrorBoundary': './src/ErrorBoundary',
+				'./ProtectedRoute': './src/ProtectedRoute',
 			},
 			shared: {
 				react: { singleton: true, requiredVersion: deps.react },
