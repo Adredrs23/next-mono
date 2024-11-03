@@ -8,6 +8,7 @@ import {
 	createBrowserRouter,
 	Navigate,
 	RouterProvider,
+	Link,
 } from 'react-router-dom';
 import Login from './Login';
 import { ProtectedRoute } from './ProtectedRoute';
@@ -108,10 +109,6 @@ const fetchPosts = async (
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <Root />,
-	},
-	{
-		path: '/login',
 		element: <Login />,
 	},
 	{
@@ -125,13 +122,12 @@ const router = createBrowserRouter([
 				</ErrorBoundary> */}
 					<Posts />
 				</div>
+				<Link to='/'>Home</Link>
 			</ProtectedRoute>
 		),
 	},
 ]);
 
 export const App: React.ComponentType = () => (
-	// <KeycloakProvider>
 	<RouterProvider router={router} />
-	// </KeycloakProvider>
 );

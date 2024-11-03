@@ -8,6 +8,7 @@ export class AuthService {
     clientSecret: process.env.NEST_KC_AUTH_SERVER_CLIENT_SECRET,
     tokenUrl: `${process.env.NEST_KC_AUTH_SERVER_ENDPOINT}/realms/mfe-realm/protocol/openid-connect/token`,
     logoutUrl: `${process.env.NEST_KC_AUTH_SERVER_ENDPOINT}/realms/mfe-realm/protocol/openid-connect/logout`,
+    userInfoUrl: `${process.env.NEST_KC_AUTH_SERVER_ENDPOINT}/realms/mfe-realm/protocol/openid-connect/userinfo`,
   };
 
   async authenticate(username: string, password: string) {
@@ -19,6 +20,7 @@ export class AuthService {
         client_secret: this.keycloakConfig.clientSecret,
         username,
         password,
+        scope: 'openid email profile', //remember to request openid as a scope explcitily to access the user profile
       }).toString(),
       {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -55,5 +57,20 @@ export class AuthService {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       },
     );
+  }
+
+  async getUserProfile(accessToken: string) {
+    try {
+      const response = await axios.get(this.keycloakConfig.userInfoUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      throw new Error('Failed to load user profile');
+    }
   }
 }

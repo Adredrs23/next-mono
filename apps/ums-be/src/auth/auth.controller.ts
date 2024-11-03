@@ -101,4 +101,19 @@ export class AuthController {
         .json({ message: 'Logout failed', error });
     }
   }
+
+  @Get('profile')
+  async getUserProfile(@Req() req: Request, @Res() res: Response) {
+    try {
+      const accessToken = req.cookies['accessToken']; // Read token from HTTP-only cookie
+      if (!accessToken) {
+        return res.status(401).json({ message: 'Unauthorized' });
+      }
+
+      const userProfile = await this.authService.getUserProfile(accessToken);
+      return res.json(userProfile);
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  }
 }
